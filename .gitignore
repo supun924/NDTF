@@ -1,18 +1,14 @@
+# Angular
+NDTFUI/node_modules/
+NDTFUI/.angular/
+NDTFUI/dist/
+
 # .NET
 bin/
 obj/
-.vs/
 
-# User files
-*.user
-*.suo
+# Visual Studio
+.vs/
 
 # Logs
 *.log
-
-# Node (if Angular exists)
-node_modules/
-dist/
-
-# IDE
-.vscode/
