@@ -1,0 +1,80 @@
+<header
+    class="fixed top-0 left-0 right-0 h-16 z-50 bg-white border-b border-gray-200 flex justify-between items-center px-6">
+
+    <!-- LEFT SIDE -->
+    <div class="flex items-center gap-3">
+        <img src="assets/ManKiwwa.png" alt="Portal Logo" class="w-12 h-12 object-contain">
+
+        <h1 class="text-lg font-bold">
+            Police Web Portal
+        </h1>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="flex items-center gap-4 relative">
+
+        <!-- MOBILE MENU BUTTON -->
+        <button class="md:hidden p-2" (click)="toggleSidebar()">
+            <span class="material-symbols-outlined text-2xl">
+                menu
+            </span>
+        </button>
+
+        <!-- SEARCH -->
+        <div class="hidden md:flex items-center border rounded-lg px-3 py-2">
+            <span class="material-symbols-outlined text-gray-500 mr-2">
+                search
+            </span>
+
+            <input type="text" placeholder="Search..." class="outline-none text-sm">
+        </div>
+
+        <!-- NOTIFICATIONS -->
+        <button class="p-2 hover:bg-gray-100 rounded">
+            <span class="material-symbols-outlined">
+                notifications
+            </span>
+        </button>
+
+        <!-- ACCOUNT BUTTON -->
+        <button class="p-2 hover:bg-gray-100 rounded" (click)="toggleUserMenu()">
+            <span class="material-symbols-outlined">
+                account_circle
+            </span>
+        </button>
+
+        <!-- DROPDOWN -->
+        <div *ngIf="userMenuOpen"
+            class="absolute right-0 top-12 w-44 bg-white border rounded-lg shadow-md overflow-hidden">
+
+            <!-- SETTINGS -->
+            <button class="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2">
+
+                <span class="material-symbols-outlined text-menu-lg text-gray-600">
+                    settings
+                </span>
+
+                <span class="text-sm text-gray-700">
+                    Settings
+                </span>
+
+            </button>
+
+            <!-- LOGOUT -->
+            <button class="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2" (click)="logout()">
+
+                <span class="material-symbols-outlined text-menu-lg text-gray-600">
+                    logout
+                </span>
+
+                <span class="text-sm text-gray-700">
+                    Logout
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>

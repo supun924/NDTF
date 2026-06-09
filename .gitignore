@@ -1,0 +1,18 @@
+# .NET
+bin/
+obj/
+.vs/
+
+# User files
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Node (if Angular exists)
+node_modules/
+dist/
+
+# IDE
+.vscode/

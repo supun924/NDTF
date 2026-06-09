@@ -1,0 +1,79 @@
+<aside class="fixed left-0 top-16 w-64 h-[calc(100vh-64px)] bg-white border-r p-4 flex flex-col
+         transform transition-transform duration-300 z-40
+         md:translate-x-0" [ngClass]="{
+    '-translate-x-full': !sidebarOpen,
+    'translate-x-0': sidebarOpen
+  }">
+
+    <nav class="space-y-1">
+
+        <!-- ACTIVE -->
+        <a (click)="openDashboard()" class="flex items-center gap-3 px-4 py-2 rounded-lg transition" [ngClass]="activeMenu === 'dashboard'
+     ? 'bg-primary text-white'
+     : 'hover:bg-gray-100 text-gray-600'">
+
+            <span class="material-symbols-outlined text-menu-lg"
+                [ngClass]="activeMenu === 'dashboard' ? 'text-white' : 'text-gray-500'">
+                dashboard
+            </span>
+
+            <span class="text-menu-md">
+                Dashboard
+            </span>
+
+        </a>
+
+        <!-- ITEM -->
+        <a (click)="openTrafficFines()" class="flex items-center gap-3 px-4 py-2 rounded-lg transition" [ngClass]="activeMenu === 'traffic-fines'
+     ? 'bg-primary text-white'
+     : 'hover:bg-gray-100 text-gray-600'">
+
+            <span class="material-symbols-outlined text-menu-lg"
+                [ngClass]="activeMenu === 'traffic-fines' ? 'text-white' : 'text-gray-500'">
+                traffic
+            </span>
+
+            <span class="text-menu-md">
+                Traffic Fines
+            </span>
+
+        </a>
+
+        <!-- ITEM -->
+        <a (click)="openDrivingLicense()" class="flex items-center gap-3 px-4 py-2 rounded-lg transition" [ngClass]="activeMenu === 'driving-license'
+     ? 'bg-primary text-white'
+     : 'hover:bg-gray-100 text-gray-600'">
+
+            <span class="material-symbols-outlined text-menu-lg"
+                [ngClass]="activeMenu === 'driving-license' ? 'text-white' : 'text-gray-500'">
+                badge
+            </span>
+
+            <span class="text-menu-md">
+                Driving License
+            </span>
+
+        </a>
+
+
+        <!-- ITEM -->
+        <a (click)="openPaymentFines()" class="flex items-center gap-3 px-4 py-2 rounded-lg transition" [ngClass]="activeMenu === 'payment-fines'
+   ? 'bg-primary text-white'
+   : 'hover:bg-gray-100 text-gray-600'">
+
+            <span class="material-symbols-outlined text-menu-lg" [ngClass]="activeMenu === 'payment-fines'
+        ? 'text-white'
+        : 'text-gray-500'">
+
+                payments
+            </span>
+
+            <span class="text-menu-md">
+                Payment Fines
+            </span>
+
+        </a>
+
+    </nav>
+
+</aside>

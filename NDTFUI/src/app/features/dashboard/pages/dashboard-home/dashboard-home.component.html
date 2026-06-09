@@ -1,0 +1,243 @@
+<app-header></app-header>
+
+<app-sidebar></app-sidebar>
+
+<!-- MAIN -->
+<main class="md:ml-64 pt-20 min-h-screen bg-gray-50 p-6">
+
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <!-- PAGE HEADER -->
+    <section class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+
+      <div>
+        <h1 class="text-2xl font-bold text-gray-700">
+          Officer Dashboard
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+          Active Duty • {{ currentDate }}
+        </p>
+      </div>
+
+      <!-- Pending Sync Widget -->
+      <div
+        class="bg-surface-container-high border border-outline-variant px-4 py-3 rounded-xl flex items-center gap-3 animate-pulse">
+        <span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">
+          sync
+        </span>
+
+        <div>
+          <p class="text-label-md font-bold text-on-tertiary-container uppercase tracking-wider">
+            Pending Sync
+          </p>
+          <p class="text-body-sm">
+            {{ pendingSync }} records awaiting uplink
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SUMMARY CARDS -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div
+        class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl custom-shadow flex flex-col justify-between">
+        <div class="flex justify-between items-start mb-4">
+          <span class="material-symbols-outlined bg-secondary-container text-on-secondary-container p-3 rounded-full">
+            description
+          </span>
+          <span class="text-secondary font-bold text-label-md">Live</span>
+        </div>
+
+        <div>
+          <p class="text-on-surface-variant text-label-lg font-label-lg">Fines Issued Today</p>
+          <p class="text-headline-md font-headline-lg text-on-background">
+            {{ data.totalFines }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl custom-shadow flex flex-col justify-between">
+        <div class="flex justify-between items-start mb-4">
+          <span class="material-symbols-outlined bg-surface-variant text-on-surface-variant p-3 rounded-full">
+            payments
+          </span>
+          <span class="text-on-surface-variant font-bold text-label-md">Verified</span>
+        </div>
+
+        <div>
+          <p class="text-on-surface-variant text-label-lg font-label-lg">Total Value</p>
+          <p class="text-headline-md font-headline-lg text-on-background">
+            LKR{{ data.totalAmount | number:'1.2-2' }}
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl custom-shadow flex flex-col justify-between">
+        <div class="flex justify-between items-start mb-4">
+          <span class="material-symbols-outlined bg-tertiary-fixed text-on-tertiary-fixed-variant p-3 rounded-full">
+            timer
+          </span>
+
+          <div class="flex gap-1 items-center">
+            <div class="w-2 h-2 rounded-full bg-secondary animate-ping"></div>
+            <span class="text-secondary font-bold text-label-md">Active</span>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-on-surface-variant text-label-lg font-label-lg">Hours on Shift</p>
+          <p class="text-headline-md font-headline-lg text-on-background">
+            {{ shiftTime }}
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TABLE -->
+    <section class="rounded-xl border border-outline-variant bg-surface-container-lowest custom-shadow overflow-hidden">
+
+      <!-- Header -->
+      <div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center">
+
+        <h3 class="text-sm font-semibold text-on-background">
+          Recent Citations
+        </h3>
+
+        <button class="text-primary text-sm flex items-center gap-1">
+
+          <span class="hover:underline">
+            View All Records
+          </span>
+
+          <span class="material-symbols-outlined text-[18px]">
+            arrow_forward
+          </span>
+
+        </button>
+
+      </div>
+
+      <!-- Table -->
+      <div class="overflow-x-auto">
+
+        <table class="w-full text-left">
+
+          <thead>
+
+            <tr class="bg-surface-container border-b border-outline-variant">
+
+              <th class="px-4 py-3 text-[11px] uppercase tracking-wide text-on-surface-variant font-semibold">
+                Fine ID
+              </th>
+
+              <th class="px-4 py-3 text-[11px] uppercase tracking-wide text-on-surface-variant font-semibold">
+                Citizen Name
+              </th>
+
+              <th class="px-4 py-3 text-[11px] uppercase tracking-wide text-on-surface-variant font-semibold">
+                Violation Type
+              </th>
+
+              <th class="px-4 py-3 text-[11px] uppercase tracking-wide text-on-surface-variant font-semibold">
+                Status
+              </th>
+
+              <th
+                class="px-4 py-3 text-right text-[11px] uppercase tracking-wide text-on-surface-variant font-semibold">
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody class="divide-y divide-outline-variant">
+
+            <tr *ngFor="let fine of data?.records" class="hover:bg-surface-container transition">
+
+              <td class="px-4 py-3 text-sm font-medium">
+                {{ fine.id }}
+              </td>
+
+              <td class="px-4 py-3 text-sm font-semibold">
+                {{ fine.name }}
+              </td>
+
+              <td class="px-4 py-3 text-sm text-on-surface-variant">
+                {{ fine.violation }}
+              </td>
+
+              <td class="px-4 py-3">
+
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold" [ngClass]="{
+                'bg-[#dcfce7] text-[#166534]': fine.status === 'Paid',
+                'bg-[#fef3c7] text-[#92400e]': fine.status === 'Unpaid'
+              }">
+
+                  {{ fine.status }}
+
+                </span>
+
+              </td>
+
+              <td class="px-4 py-3 text-right">
+
+                <button class="material-symbols-outlined text-[18px] text-on-surface-variant hover:text-primary"
+                  (click)="openMenu(fine)">
+
+                  more_vert
+
+                </button>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="flex items-center justify-between
+           border-t border-outline-variant
+           px-4 py-3">
+
+        <p class="text-xs text-on-surface-variant">
+
+          Showing 1–10 of 10
+
+        </p>
+
+        <div class="flex gap-2">
+
+          <button class="rounded-lg border border-outline-variant
+               px-3 py-1 text-xs">
+
+            Previous
+
+          </button>
+
+          <button class="rounded-lg border border-outline-variant
+               px-3 py-1 text-xs">
+
+            Next
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
