@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 namespace NDTFAPI.Application.Features.Users.Commands.CreateUser
 {
     public record CreateUserCommand(
-    string FirstName,
-    string LastName,
-    string Username,
-    string Email,
-    string Password,
-    int RoleId
+        int RoleId,
+        int PoliceStationId,
+        string FirstName,
+        string LastName,
+        string ServiceNumber,
+        string Email,
+        string MobileNumber,
+        string Username,
+        string Password
 ) : IRequest<int>;
 }

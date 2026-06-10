@@ -4,8 +4,8 @@ NDTFUI/.angular/
 NDTFUI/dist/
 
 # .NET
-bin/
-obj/
+NDTFAPI/bin/
+NDTFAPI/obj/
 
 # Visual Studio
 .vs/

@@ -29,5 +29,53 @@ namespace NDTFAPI.Infrastructure.Persistence
         public DbSet<LicenseConfiscation> LicenseConfiscations => Set<LicenseConfiscation>();
 
         public DbSet<PoliceStation> PoliceStations => Set<PoliceStation>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Primary Keys
+
+            modelBuilder.Entity<Role>()
+                .HasKey(x => x.RoleId);
+
+            modelBuilder.Entity<User>()
+                .HasKey(x => x.UserId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(x => x.Role)
+                .WithMany()
+                .HasForeignKey(x => x.RoleId);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.PoliceStation)
+                .WithMany(p => p.Users)
+                .HasForeignKey(u => u.PoliceStationId);
+
+
+            modelBuilder.Entity<Driver>()
+                .HasKey(x => x.DriverId);
+
+            modelBuilder.Entity<Vehicle>()
+                .HasKey(x => x.VehicleId);
+
+            modelBuilder.Entity<Violation>()
+                .HasKey(x => x.ViolationId);
+
+            modelBuilder.Entity<Fine>()
+                .HasKey(x => x.FineId);
+
+            modelBuilder.Entity<FineViolation>()
+                .HasKey(x => x.FineViolationId);
+
+            modelBuilder.Entity<Payment>()
+                .HasKey(x => x.PaymentId);
+
+            modelBuilder.Entity<LicenseConfiscation>()
+                .HasKey(x => x.ConfiscationId);
+
+            modelBuilder.Entity<PoliceStation>()
+                .HasKey(x => x.StationId);
+        }
     }
 }

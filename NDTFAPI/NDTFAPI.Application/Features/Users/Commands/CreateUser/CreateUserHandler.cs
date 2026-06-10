@@ -39,13 +39,16 @@ namespace NDTFAPI.Application.Features.Users.Commands.CreateUser
 
             var user = new User
             {
+                RoleId = request.RoleId,
+                PoliceStationId = request.PoliceStationId,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Username = request.Username,
+                ServiceNumber = request.ServiceNumber,
                 Email = request.Email,
+                MobileNumber = request.MobileNumber,
+                Username = request.Username,
                 PasswordHash =
                     _passwordHasher.Hash(request.Password),
-                RoleId = request.RoleId,
                 IsActive = true
             };
 
