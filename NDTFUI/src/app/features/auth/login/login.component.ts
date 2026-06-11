@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MockAuthService } from '../../../core/services/mock-auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: MockAuthService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -35,38 +35,82 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
+
     if (this.loginForm.invalid) {
       this.message = 'Please enter username and password';
       return;
     }
 
     this.loading = true;
-    this.message = '';
 
-    const { username, password } = this.loginForm.value;
+    const { username, password } =
+      this.loginForm.value;
+    debugger;
+    this.authService.login(
+      username,
+      password
+    ).subscribe({
 
-    this.authService.login(username, password).subscribe({
-      next: (result: any) => {
+      next: (response) => {
 
         this.loading = false;
 
-        if (result?.success && result?.data) {
-          this.message = `Welcome ${result.data.username} (${result.data.role})`;
+        localStorage.setItem(
+          'token',
+          response.token
+        );
 
-          localStorage.setItem('token', result.data.token);
+        this.message = 'Login Successful';
 
-          this.router.navigate(['/dashboard/dashboard-home']);
-        } else {
-          this.message = result?.message || 'Login failed';
-        }
+        this.router.navigate([
+          '/dashboard/dashboard-home'
+        ]);
       },
 
-      error: () => {
+      error: (error) => {
+
         this.loading = false;
-        this.message = 'Server error. Try again.';
+
+        this.message =
+          error.error?.message ??
+          'Invalid Username or Password';
       }
     });
   }
+
+  // onLogin(): void {
+  //   if (this.loginForm.invalid) {
+  //     this.message = 'Please enter username and password';
+  //     return;
+  //   }
+
+  //   this.loading = true;
+  //   this.message = '';
+
+  //   const { username, password } = this.loginForm.value;
+
+  //   this.authService.login(username, password).subscribe({
+  //     next: (result: any) => {
+
+  //       this.loading = false;
+
+  //       if (result?.success && result?.data) {
+  //         this.message = `Welcome ${result.data.username} (${result.data.role})`;
+
+  //         localStorage.setItem('token', result.data.token);
+
+  //         this.router.navigate(['/dashboard/dashboard-home']);
+  //       } else {
+  //         this.message = result?.message || 'Login failed';
+  //       }
+  //     },
+
+  //     error: () => {
+  //       this.loading = false;
+  //       this.message = 'Server error. Try again.';
+  //     }
+  //   });
+  // }
 
   openForgotPassword(): void {
     this.router.navigate(['/auth/fogotpassword']);

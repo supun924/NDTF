@@ -3,12 +3,18 @@ NDTFUI/node_modules/
 NDTFUI/.angular/
 NDTFUI/dist/
 
-# .NET
-NDTFAPI/bin/
-NDTFAPI/obj/
+# .NET build output
+**/bin/
+**/obj/
 
 # Visual Studio
 .vs/
+*.user
+*.suo
 
 # Logs
 *.log
+Logs/
+
+# Optional
+*.cache

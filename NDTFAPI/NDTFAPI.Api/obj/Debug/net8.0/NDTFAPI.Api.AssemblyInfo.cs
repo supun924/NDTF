@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NDTFAPI.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ad1157f560febfdd0f109476ff5d7801edeb372")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3de21e9481300bb4b51fc7f0e4908253d61cfa7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("NDTFAPI.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NDTFAPI.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

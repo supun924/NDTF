@@ -30,6 +30,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 #endregion
 
+#region CORS (FIX FOR ANGULAR)
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+#endregion
+
 #region Dependency Injection
 builder.Services.AddApplication();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -109,6 +123,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAngular");
 
 app.UseAuthentication();
 

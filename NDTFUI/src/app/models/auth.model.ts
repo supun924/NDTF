@@ -1,15 +1,8 @@
-export interface User {
+export interface LoginRequest {
   username: string;
   password: string;
-  role: 'ADMIN' | 'OFFICER';
 }
 
 export interface LoginResponse {
-  success: boolean;
-  message: string;
-  data?: {
-    username: string;
-    role: 'ADMIN' | 'OFFICER';
-    token: string;
-  };
+  token: string;
 }
